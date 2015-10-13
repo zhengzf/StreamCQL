@@ -24,7 +24,7 @@
     <packaging>pom</packaging>
     <name>streamCQL</name>
     <description>streamCQL</description>
-    <url>https://github.com/HuaweiBigData/CQL</url>
+    <url>https://github.com/HuaweiBigData/StreamCQL</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
