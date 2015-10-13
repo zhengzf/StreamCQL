@@ -48,11 +48,6 @@
 
     <repositories>
         <repository>
-            <id>bigdata</id>
-            <name>huawei distribution repository</name>
-            <url>http://10.64.71.167:9090/nexus-webapp-1.9.1.1/content/groups/public</url>
-        </repository>
-        <repository>
             <id>central</id>
             <name>central distribution repository</name>
             <url>http://repo1.maven.org/maven2</url>
