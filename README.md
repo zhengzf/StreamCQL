@@ -83,12 +83,14 @@ SOURCE RANDOMGEN
 CREATE OUTPUT STREAM s2 
     (c1 STRING)
 SINK kafakOutput
-    PROPERTIES ( topic = "cqlOut", zookeepers = "127.0.0.1:2181", brokers = "127.0.0.1:9092" );
+    PROPERTIES ( topic = "cqlOut", zookeepers = "127.0.0.1:2181", 
+        brokers = "127.0.0.1:9092" );
 
 CREATE INPUT STREAM s3
     ( c1 STRING)
 SOURCE KafkaInput
-    PROPERTIES (groupid = "cqlClient", topic = "cqlInput", zookeepers = "127.0.0.1:2181", brokers = "127.0.0.1:9092" )
+    PROPERTIES (groupid = "cqlClient", topic = "cqlInput", 
+        zookeepers = "127.0.0.1:2181", brokers = "127.0.0.1:9092" )
 
 CREATE OUTPUT STREAM s4
     (c1 STRING)
