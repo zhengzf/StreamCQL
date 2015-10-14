@@ -1,4 +1,4 @@
-# StreamCQL: Continuous Query Language on RealTime Computation System
+# StreamCQL: Continuous Query Language on RealTime Computation System.(example: Apache Storm)
 
 ------
 
