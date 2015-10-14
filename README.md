@@ -1,4 +1,4 @@
-# StreamCQL: Continuous Query Language on RealTime Computation System.(example: Apache Storm)
+# StreamCQL: Continuous Query Language on RealTime Computation System
 
 ------
 
@@ -8,6 +8,11 @@ During CQL syntax design, it is found that syntax of existing CEP products inclu
 The CQL design objective is to use SQL statements and certain commands to execute and release all tasks so that the tasks can be distributed by using SQL interfaces. In this way, client interfaces are unified. Users who are familiar with SQL statements can develop operational CQL programs only by learning certain special CQL syntax, such as syntax of window or stream definitions. This reduces difficulty. 
 
 ------
+## Key Concepts Definitions
+
+ - Stream: A set of (infinite) elements, each of which belongs to a same schema. Each element is related to logic time. That is, streams have the tuple and time attributes. Any elements can be expressed in the format of Element<tuple,Time>, in which tuple includes data structures and content, and Time is the logic time of data.
+ - Window: A way for processing unbounded and streaming events. A window sets an event stream to a static view at a moment for various query operations on database tables. Two types of window are defined on a stream, that is, time-based and row-based windows. Both types of window support slide and tumble. 
+ - Expression: A set of symbols and operators. The CQL parsing engine processes an expression to obtain single values. A simple expression can be a constant, variable, or function. Two or more simple expressions can be combined as a complex expression by using operators.
 
 ## Requirements
 
