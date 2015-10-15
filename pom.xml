@@ -73,13 +73,6 @@
             <url>http://repository.springsource.com/maven/bundles/external</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>bigdata</id>
-            <url>http://10.64.71.167:9090/nexus-webapp-1.9.1.1/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <pluginManagement>
             <plugins>
