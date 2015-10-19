@@ -19,7 +19,7 @@ The CQL design objective is to use SQL statements and certain commands to execut
 Storm 0.10.0-beta : Required
 Kafka_2.10 0.8.2.2 : Optional
 
-## Building StreamCQ
+## Building StreamCQL
 StreamCQL is built using [Apache Maven](http://maven.apache.org/).
 
  1. Clone HuaweiBigData/StreamCQL from github.
@@ -39,7 +39,7 @@ $ mvn clean install
  1. Copy stream-cql-bianry-1.0.tar.gz from
 
     ${StreamCQL_Source_Dir}/cql-binary/target to Storm Client node.
- 2. unCompression stream-cql-bianry-1.0.tar.gz
+ 2. unCompresse stream-cql-bianry-1.0.tar.gz
 ```shell
 $ tar xvf stream-cql-bianry-1.0.tar.gz
 ```
@@ -69,7 +69,7 @@ INSERT INTO STREAM rs SELECT type, COUNT(id) as cc
     FROM s[RANGE 20 SECONDS BATCH]
     WHERE id > 5 GROUP BY type;
 
-SBUMIT APPLICATION example;    
+SUBMIT APPLICATION example;    
 ```
 ## Another CQL example with [Apache Kafka](http://kafka.apache.org/)
 
