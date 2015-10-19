@@ -17,6 +17,7 @@ The CQL design objective is to use SQL statements and certain commands to execut
 ## Requirements
 
 Storm 0.10.0-beta : Required
+
 Kafka_2.10 0.8.2.2 : Optional
 
 ## Building StreamCQL
