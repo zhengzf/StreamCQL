@@ -331,14 +331,14 @@ public class SelectClauseAnalyzer extends BaseAnalyzer
     
     private FieldExpressionContext createFieldExpression(String schemaName, String columnName)
     {
-        AtomExpressionContext atomExp = craeteAtomExpression(columnName);
+        AtomExpressionContext atomExp = createAtomExpression(columnName);
         FieldExpressionContext fexp = new FieldExpressionContext();
         fexp.setStreamNameOrAlias(schemaName);
         fexp.setAtomExpression(atomExp);
         return fexp;
     }
     
-    private AtomExpressionContext craeteAtomExpression(String columnName)
+    private AtomExpressionContext createAtomExpression(String columnName)
     {
         AtomExpressionContext atomExp = new AtomExpressionContext();
         atomExp.setColumnName(columnName);
