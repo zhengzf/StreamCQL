@@ -56,16 +56,31 @@ $ cd stream-cql-bianry-1.0/bin
 ## StartUp Apache Storm 
 Before testing StreamCQL you should deploy a storm on your machine 
 
+First , startup Zookeeper instance :
+
+```
+wget http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+
+tar xvf zookeeper-3.4.6.tar.gz ；cd zookeeper-3.4.6
+
+bin/zkServer.sh start
+
+```
+
 ```
 wget http://apache.fayea.com/storm/apache-storm-0.10.0/apache-storm-0.10.0.zip
+
 unzip apache-storm-0.10.0.zip
+
 cd apache-storm-0.10.0
 ```
 StartUp Storm in Local Modle:
 
 ```
 nohup bin/storm nimbus &
+
 nohup bin/storm ui &
+
 nohup bin/storm supervisor &
 ```
 ------
