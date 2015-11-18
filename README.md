@@ -16,7 +16,7 @@ The CQL design objective is to use SQL statements and certain commands to execut
 
 ## Requirements
 
-Storm 0.10.0-beta : Required
+Storm 0.10.0 : Required
 
 Kafka_2.10 0.8.2.2 : Optional
 
@@ -27,10 +27,12 @@ StreamCQL is built using [Apache Maven](http://maven.apache.org/).
 ```shell
 $ git clone https://github.com/HuaweiBigData/StreamCQL
 ```
+
  2. Go to the root of source directory.
 ```shell
 $ cd StreamCQL
 ```
+
  3. build project
 ```shell
 $ mvn clean install
@@ -40,14 +42,34 @@ $ mvn clean install
  1. Copy stream-cql-bianry-1.0.tar.gz from
 
     ${StreamCQL_Source_Dir}/cql-binary/target to Storm Client node.
+    
  2. unCompresse stream-cql-bianry-1.0.tar.gz
 ```shell
 $ tar xvf stream-cql-bianry-1.0.tar.gz
 ```
+
  3. Go to Stream CQL bin directory
 ```shell
 $ cd stream-cql-bianry-1.0/bin
 ```
+
+## StartUp Apache Storm 
+Before testing StreamCQL you should deploy a storm on your machine 
+
+```
+wget http://apache.fayea.com/storm/apache-storm-0.10.0/apache-storm-0.10.0.zip
+unzip apache-storm-0.10.0.zip
+cd apache-storm-0.10.0
+```
+StartUp Storm in Local Modle:
+
+```
+nohup bin/storm nimbus &
+nohup bin/storm ui &
+nohup bin/storm supervisor &
+```
+------
+
 ## Submit CQL application to Storm
  1. Open CQL Client Shell.
 ```shell
@@ -55,7 +77,8 @@ $ ./cql
 ```
  2. Execute CQL in CQL client shell.
 this is a simple cql example.
-```sql
+
+```
 CREATE INPUT STREAM s
     (id INT, name STRING, type INT)
 SOURCE randomgen
@@ -72,6 +95,9 @@ INSERT INTO STREAM rs SELECT type, COUNT(id) as cc
 
 SUBMIT APPLICATION example;    
 ```
+
+------
+
 ## Another CQL example with [Apache Kafka](http://kafka.apache.org/)
 
 ```sql
