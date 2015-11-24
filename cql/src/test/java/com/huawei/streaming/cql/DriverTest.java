@@ -426,18 +426,6 @@ public class DriverTest
      * @throws Exception 如果错误，抛出异常
      */
     @Test
-    public void testFunctionNot()
-     throws Exception
-    {
-        executeCase("functionNot");
-    }
-
-    /**
-     * 测试
-     *
-     * @throws Exception 如果错误，抛出异常
-     */
-    @Test
     public void testSameStream()
      throws Exception
     {

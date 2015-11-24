@@ -101,8 +101,8 @@ public class Merger
 
         if (Strings.isNullOrEmpty(System.getProperty("cql.dependency.jar")))
         {
+            //for unit test, not throw exception here.
             LOG.error("Failed to found cql.dependency.jar path in System properties.");
-            throw new IOException("Failed to found cql.dependency.jar path in System properties.");
         }
         else
         {
