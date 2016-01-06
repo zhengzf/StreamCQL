@@ -9,8 +9,10 @@
 > * support in、like、case、between expression
 > * add RDBDatasource，read data  from data base using JDBC.
 > * [#13][1] support jstorm(uncertain)
+
 ##Improvement
 > * [#15][2] support storm local model in StreamCQL.
+
 ##BUG
 > * [#19][3] Please add setting JAVA_HOME before launching cql to documentation
 
