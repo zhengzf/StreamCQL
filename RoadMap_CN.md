@@ -9,8 +9,10 @@
 > * 支持in、like、case、between表达式
 > * 添加RDBDatasource数据源，支持在算子中，通过JDBC从关系型数据库中读取数据。
 > * [#13][1] 添加对jstorm的适配支持(待定)
+
 ##改进列表
 > * [#15][2] 解决CQL中不能执行local模式的问题
+
 ##问题解决
 > * [#19][3] Please add setting JAVA_HOME before launching cql to documentation
 
