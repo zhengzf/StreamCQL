@@ -20,15 +20,13 @@ package com.huawei.streaming.cql.builder.physicoptimizer;
 
 import java.util.List;
 
+import com.huawei.streaming.api.opereators.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.huawei.streaming.api.Application;
-import com.huawei.streaming.api.opereators.FilterOperator;
-import com.huawei.streaming.api.opereators.Operator;
-import com.huawei.streaming.api.opereators.OperatorTransition;
 import com.huawei.streaming.cql.exception.ApplicationBuildException;
 import com.huawei.streaming.cql.executor.ExecutorUtils;
 import com.huawei.streaming.exception.ErrorCode;
@@ -59,7 +57,7 @@ public class FilterPruner implements Optimizer
         transitions = app.getOpTransition();
         
         checkOperators();
-        prunOperators();
+        prunOperators(app);
         return app;
     }
     
@@ -91,23 +89,23 @@ public class FilterPruner implements Optimizer
         return false;
     }
     
-    private void prunOperators()
+    private void prunOperators(Application app)
         throws ApplicationBuildException
     {
         for (String opid : prunedOperators)
         {
-            prun(opid);
+            prun(opid, app);
         }
     }
     
-    private void prun(String operatorId)
+    private void prun(String operatorId, Application app)
         throws ApplicationBuildException
     {
-        removeTransition(operatorId);
+        removeTransition(operatorId, app);
         removeOperator(operatorId);
     }
     
-    private void removeTransition(String operatorId)
+    private void removeTransition(String operatorId, Application app)
         throws ApplicationBuildException
     {
         /*
@@ -139,6 +137,29 @@ public class FilterPruner implements Optimizer
          */
         toTransition.setFromOperatorId(fromTransition.getFromOperatorId());
         transitions.remove(fromTransition);
+
+        /**
+         * 修改from operator算子中的流名称，如果有
+         */
+        Operator operator = ExecutorUtils.getOperatorById(fromTransition.getFromOperatorId(), app.getOperators());
+        if(operator == null)
+        {
+            throw new ApplicationBuildException(ErrorCode.TOP_TRANSITION_FROM, fromTransition.getFromOperatorId());
+        }
+
+        if(operator instanceof SplitterOperator)
+        {
+            SplitterOperator spliter = (SplitterOperator)operator;
+            for(SplitterSubContext sub : spliter.getSubSplitters())
+            {
+                if(sub.getStreamName().equals(fromTransition.getStreamName()))
+                {
+                    sub.setStreamName(toTransition.getStreamName());
+                }
+            }
+        }
+
+
     }
     
     private void removeOperator(String opid)

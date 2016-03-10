@@ -21,18 +21,18 @@ package com.huawei.streaming.cql.hooks;
 import com.huawei.streaming.cql.DriverContext;
 import com.huawei.streaming.cql.exception.SemanticAnalyzerException;
 import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.AnalyzeContext;
-import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.SelectAnalyzeContext;
-import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.SelectWithOutFromAnalyzeContext;
+import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.MultiInsertAnalyzeContext;
+import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.MultiInsertStatementAnalyzeContext;
+import com.huawei.streaming.cql.semanticanalyzer.parser.context.MultiInsertStatementContext;
 import com.huawei.streaming.cql.semanticanalyzer.parser.context.ParseContext;
-import com.huawei.streaming.cql.semanticanalyzer.parser.context.SelectStatementContext;
 
 /**
- * select查询语句解析完成之后待执行的动作
- * 将输出的scheam加入到schmea的列表中，以待下一次使用
+ * multiinsert语句分析前后的钩子
  * 
  */
-public class SelectsAnalyzeHook implements SemanticAnalyzeHook
+public class MultiInsertAnalyzeHook implements SemanticAnalyzeHook
 {
+    
     /**
      * {@inheritDoc}
      */
@@ -40,7 +40,7 @@ public class SelectsAnalyzeHook implements SemanticAnalyzeHook
     public boolean validate(ParseContext parseContext)
         throws SemanticAnalyzerException
     {
-        return parseContext instanceof SelectStatementContext;
+        return parseContext instanceof MultiInsertStatementContext;
     }
     
     /**
@@ -59,17 +59,10 @@ public class SelectsAnalyzeHook implements SemanticAnalyzeHook
     public void postAnalyze(DriverContext context, AnalyzeContext analyzeConext)
         throws SemanticAnalyzerException
     {
-        if (analyzeConext instanceof SelectAnalyzeContext)
+        MultiInsertStatementAnalyzeContext multiInsertContext = (MultiInsertStatementAnalyzeContext)analyzeConext;
+        for(MultiInsertAnalyzeContext insertContext : multiInsertContext.getMultiSelectBodyAnalyzeContexts())
         {
-            SelectAnalyzeContext scontext = (SelectAnalyzeContext) analyzeConext;
-            context.addSchema(scontext.getSelectClauseContext().getOutputSchema());
-        } else if (analyzeConext instanceof SelectWithOutFromAnalyzeContext)
-        {
-            SelectWithOutFromAnalyzeContext scontext = (SelectWithOutFromAnalyzeContext) analyzeConext;
-            context.addSchema(scontext.getSelectClauseContext().getOutputSchema());
-        } else {
-            return;
+            new SelectsAnalyzeHook().postAnalyze(context, insertContext.getSelectContext());
         }
     }
-    
 }
