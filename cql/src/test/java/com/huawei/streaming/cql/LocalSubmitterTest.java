@@ -568,4 +568,28 @@ public class LocalSubmitterTest
     {
         LocalTaskCommons.localSubmit(BASICPATH, "userOperator9");
     }
+
+    /**
+     * 测试
+     *
+     * @throws Exception 如果错误，抛出异常
+     */
+    @Test
+    public void testSplit3()
+            throws Exception
+    {
+        LocalTaskCommons.localSubmit(BASICPATH, "split3");
+    }
+
+    /**
+     * 测试
+     *
+     * @throws Exception 如果错误，抛出异常
+     */
+    @Test
+    public void testSplit6()
+            throws Exception
+    {
+        LocalTaskCommons.localSubmit(BASICPATH, "split6");
+    }
 }

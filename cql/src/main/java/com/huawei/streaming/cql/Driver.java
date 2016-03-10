@@ -22,15 +22,7 @@ import java.util.List;
 
 import com.huawei.streaming.config.StreamingConfig;
 import com.huawei.streaming.cql.exception.CQLException;
-import com.huawei.streaming.cql.hooks.CommondAnalyzehook;
-import com.huawei.streaming.cql.hooks.CreateDatasourceAnalyzehook;
-import com.huawei.streaming.cql.hooks.CreateStreamAnalyzehook;
-import com.huawei.streaming.cql.hooks.DriverCleanerHook;
-import com.huawei.streaming.cql.hooks.DriverRunHook;
-import com.huawei.streaming.cql.hooks.InsertAnalyzeHook;
-import com.huawei.streaming.cql.hooks.InsertUserOperatorAnalyzeHook;
-import com.huawei.streaming.cql.hooks.SelectsAnalyzeHook;
-import com.huawei.streaming.cql.hooks.SemanticAnalyzeHook;
+import com.huawei.streaming.cql.hooks.*;
 import com.huawei.streaming.cql.semanticanalyzer.parser.IParser;
 import com.huawei.streaming.cql.semanticanalyzer.parser.ParserFactory;
 import com.huawei.streaming.cql.semanticanalyzer.parser.context.ParseContext;
@@ -89,6 +81,7 @@ public class Driver implements DriverRunHook
         analyzeHooks.add(new SelectsAnalyzeHook());
         analyzeHooks.add(new InsertAnalyzeHook());
         analyzeHooks.add(new InsertUserOperatorAnalyzeHook());
+        analyzeHooks.add(new MultiInsertAnalyzeHook());
     }
     
     /**

@@ -901,7 +901,31 @@ public class DriverTest
     {
         executeCase("userOperator9");
     }
-    
+
+    /**
+     * 测试
+     *
+     * @throws Exception 如果错误，抛出异常
+     */
+    @Test
+    public void testSplit3()
+            throws Exception
+    {
+        executeCase("split3");
+    }
+
+    /**
+     * 测试
+     *
+     * @throws Exception 如果错误，抛出异常
+     */
+    @Test
+    public void testSplit6()
+            throws Exception
+    {
+        executeCase("split6");
+    }
+
     private void executeCase(String caseName)
      throws Exception
     {
