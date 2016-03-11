@@ -471,7 +471,7 @@ public class ApplicationBuilder
             {
                 if (!mInsert.isPipeStreamNotCreated())
                 {
-                    return;
+                    continue;
                 }
                 SplitContext sc = createPipeStreamSplitContext(mInsert.getOutputSchema());
                 splitContexts.add(sc);
