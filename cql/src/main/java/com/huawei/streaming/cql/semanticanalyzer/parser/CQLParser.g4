@@ -29,9 +29,6 @@ tokenVocab=CQLLexer;
 
 import CreateStatements,CommandsStatements,Expressions,SelectStatements,Identifiers;
 
-@parser::header {
-package com.huawei.streaming.cql.semanticanalyzer.parser;
-}
 
 statement
 	:	ddlStatement EOF

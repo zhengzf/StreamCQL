@@ -78,8 +78,9 @@ public abstract class CreateStreamAnalyzer extends BaseAnalyzer
     {
         Schema schema = new Schema(streamName);
         for (ColumnNameTypeContext column : columns.getColumns())
-        {
-            schema.addCol(new Column(column.getColumnName(), column.getColumnType().getWrapperClass()));
+        {  
+            schema.addCol(new Column(column.getColumnName(), column.getColumnType().getWrapperClass(),
+            		column.getColumnRawName()));
         }
         return schema;
     }

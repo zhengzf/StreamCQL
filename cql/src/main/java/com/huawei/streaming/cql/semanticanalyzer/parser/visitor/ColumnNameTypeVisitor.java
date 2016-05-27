@@ -58,6 +58,7 @@ public class ColumnNameTypeVisitor extends AbsCQLParserBaseVisitor<ColumnNameTyp
     public ColumnNameTypeContext visitColumnName(@NotNull CQLParser.ColumnNameContext ctx)
     {
         context.setColumnName(ctx.getText().toLowerCase(Locale.US));
+        context.setColumnRawName(ctx.getText());
         return context;
     }
     

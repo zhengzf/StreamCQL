@@ -22,6 +22,21 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ctrip.streaming.datasource.CRedisDataSource;
+import com.ctrip.streaming.datasource.DBDataSource;
+import com.ctrip.streaming.datasource.DalDataSource;
+import com.ctrip.streaming.datasource.FileDataSource;
+import com.ctrip.streaming.datasource.HbaseDataSource;
+import com.ctrip.streaming.datasource.RedisDataSource;
+import com.ctrip.streaming.operator.inputstream.ConsoleInputOp;
+import com.ctrip.streaming.operator.inputstream.HermesSourceOp;
+import com.ctrip.streaming.operator.inputstream.HermesSourceOper;
+import com.ctrip.streaming.operator.outputstream.CredisFunctionOp;
+import com.ctrip.streaming.operator.outputstream.RedisFunctionOp;
+import com.ctrip.streaming.operator.outputstream.database.DbSinkOp;
+import com.ctrip.streaming.operator.outputstream.hbase.HBaseFunctionOp;
+import com.ctrip.streaming.serde.HermesSerDe;
+import com.ctrip.streaming.serde.HermesSerDese;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.huawei.streaming.datasource.IDataSource;
@@ -51,11 +66,26 @@ public class CQLSimpleLexerMapping
         //序列化反序列化类
         MAPPING.put("SimpleSerDe", SimpleSerDe.class.getName());
         MAPPING.put("CsvSerDe", CSVSerDe.class.getName());
-
+        MAPPING.put("HermesSerDe", HermesSerDe.class.getName());
+        MAPPING.put("HermesSerDese", HermesSerDese.class.getName());
+        MAPPING.put("consoleInput", ConsoleInputOp.class.getName());
+        
         MAPPING.put("KafkaInput", KafkaSourceOp.class.getName());
         MAPPING.put("KafkaOutput", KafkaFunctionOp.class.getName());
+        MAPPING.put("HermesSourceOp", HermesSourceOp.class.getName());
+        MAPPING.put("HermesSourceOper", HermesSourceOper.class.getName());
         MAPPING.put("RandomGen", HeadStreamSourceOp.class.getName());
         MAPPING.put("ConsoleOutput", ConsolePrintOp.class.getName());
+        MAPPING.put("CRedisDataSource", CRedisDataSource.class.getName());
+        MAPPING.put("CRedisOutput", CredisFunctionOp.class.getName());
+        MAPPING.put("RedisDataSource", RedisDataSource.class.getName());
+        MAPPING.put("RedisOutput", RedisFunctionOp.class.getName());
+        MAPPING.put("FileDataSource", FileDataSource.class.getName());
+        MAPPING.put("HBaseFunctionOp", HBaseFunctionOp.class.getName());
+        MAPPING.put("DbSinkOp", DbSinkOp.class.getName());
+        MAPPING.put("DbDataSource", DBDataSource.class.getName());
+        MAPPING.put("DalDataSource", DalDataSource.class.getName());
+        MAPPING.put("HBaseDataSource", HbaseDataSource.class.getName());
     }
 
     /**

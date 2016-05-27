@@ -507,7 +507,8 @@ public class ExecutorPlanGenerator
         {
             Class< ? > type = getColumnDataType(schema, i);
             String colName = schema.getCols().get(i).getName();
-            attrs.add(new Attribute(type, colName));
+            String rawName = schema.getCols().get(i).getRawName();
+            attrs.add(new Attribute(type, colName,rawName));
         }
         
         return new TupleEventType(schema.getId(), attrs);

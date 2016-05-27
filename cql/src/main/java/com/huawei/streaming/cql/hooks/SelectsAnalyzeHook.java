@@ -22,7 +22,6 @@ import com.huawei.streaming.cql.DriverContext;
 import com.huawei.streaming.cql.exception.SemanticAnalyzerException;
 import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.AnalyzeContext;
 import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.SelectAnalyzeContext;
-import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.SelectWithOutFromAnalyzeContext;
 import com.huawei.streaming.cql.semanticanalyzer.parser.context.ParseContext;
 import com.huawei.streaming.cql.semanticanalyzer.parser.context.SelectStatementContext;
 
@@ -59,17 +58,13 @@ public class SelectsAnalyzeHook implements SemanticAnalyzeHook
     public void postAnalyze(DriverContext context, AnalyzeContext analyzeConext)
         throws SemanticAnalyzerException
     {
-        if (analyzeConext instanceof SelectAnalyzeContext)
+        if (!(analyzeConext instanceof SelectAnalyzeContext))
         {
-            SelectAnalyzeContext scontext = (SelectAnalyzeContext) analyzeConext;
-            context.addSchema(scontext.getSelectClauseContext().getOutputSchema());
-        } else if (analyzeConext instanceof SelectWithOutFromAnalyzeContext)
-        {
-            SelectWithOutFromAnalyzeContext scontext = (SelectWithOutFromAnalyzeContext) analyzeConext;
-            context.addSchema(scontext.getSelectClauseContext().getOutputSchema());
-        } else {
             return;
         }
+        
+        SelectAnalyzeContext scontext = (SelectAnalyzeContext)analyzeConext;
+        context.addSchema(scontext.getSelectClauseContext().getOutputSchema());
     }
     
 }

@@ -78,7 +78,12 @@ subQueryExpression
  	;
 
 binaryExpression
-	:	bitExpression relationExpression*
+	:   bitExpression relationExpression* 
+	;
+
+
+constList
+	:	LPAREN constant (COMMA constant)* RPAREN
 	;
 
 relationExpression
@@ -93,6 +98,8 @@ relationOperator
     |	LESSTHAN
     |	GREATERTHANOREQUALTO
     |	GREATERTHAN
+	|	KW_IN
+	|	KW_LIKE
     ;
 
     
@@ -139,6 +146,7 @@ arithmeticStarOperator
 
 atomExpression
     :	constNull
+	|	constList
     |	constant
     |	function
     |	castExpression

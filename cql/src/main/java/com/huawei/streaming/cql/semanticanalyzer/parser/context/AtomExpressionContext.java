@@ -43,7 +43,9 @@ public class AtomExpressionContext extends BaseExpressionParseContext
     
     private BaseExpressionParseContext constant;
     
-    private BaseExpressionParseContext function;
+    private BaseExpressionParseContext constList;
+    
+	private BaseExpressionParseContext function;
     
     private BaseExpressionParseContext castExpression;
     
@@ -124,6 +126,15 @@ public class AtomExpressionContext extends BaseExpressionParseContext
         this.constant = constant;
     }
     
+    public BaseExpressionParseContext getConstList() {
+		return constList;
+	}
+
+	public void setConstList(BaseExpressionParseContext constList) {
+		this.constList = constList;
+	}
+
+    
     public BaseExpressionParseContext getFunction()
     {
         return function;
@@ -199,6 +210,9 @@ public class AtomExpressionContext extends BaseExpressionParseContext
         if (constant != null)
         {
             return constant.createExpressionDesc(getSchemas());
+        }
+        if(constList != null){
+        	return constList.createExpressionDesc(getSchemas());
         }
         if (function != null)
         {

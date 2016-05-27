@@ -98,6 +98,17 @@ public class AtomExpressionVisitor extends AbsCQLParserBaseVisitor<AtomExpressio
      * {@inheritDoc}
      */
     @Override
+    public AtomExpressionContext visitConstList(@NotNull CQLParser.ConstListContext ctx)
+    {
+        ConstListVisitor visitor = new ConstListVisitor();
+        context.setConstList(visitor.visit(ctx));
+        return context;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public AtomExpressionContext visitFunction(@NotNull CQLParser.FunctionContext ctx)
     {
         FunctionVisitor visitor = new FunctionVisitor();

@@ -19,6 +19,7 @@
 package com.huawei.streaming.cql.executor.mergeuserdefinds;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.List;
 
@@ -72,7 +73,6 @@ public class JarFilesMerger
         {
             return;
         }
-        
         for (File jarsUnzipDirectory : jarDirs)
         {
             String jarName = jarsUnzipDirectory.getName();
@@ -81,6 +81,40 @@ public class JarFilesMerger
             {
                 LOG.info("start to copy {}", child.getName());
                 copyDirectory(child, new File(tmpOutputDir, child.getName()), jarName);
+            }
+        }
+        LOG.info("添加配置文件");
+        for (File jarsUnzipDirectory : jarDirs)
+        {
+            File[] propertiesFiles = jarsUnzipDirectory.listFiles(new FilenameFilter() {
+    			@Override
+    			public boolean accept(File dir, String name) {
+    				// TODO Auto-generated method stub
+    				return name.endsWith(".properties");
+    			}
+    		});
+            for (File propertiesFile : propertiesFiles)
+            {
+                String fileName = propertiesFile.getName();
+                LOG.info("start to copy {}", fileName);
+                doCopyFile(propertiesFile, new File(tmpOutputDir, fileName), "");
+            }
+        }
+        LOG.info("添加xml配置文件");
+        for (File jarsUnzipDirectory : jarDirs)
+        {
+            File[] propertiesFiles = jarsUnzipDirectory.listFiles(new FilenameFilter() {
+    			@Override
+    			public boolean accept(File dir, String name) {
+    				// TODO Auto-generated method stub
+    				return name.endsWith(".xml");
+    			}
+    		});
+            for (File propertiesFile : propertiesFiles)
+            {
+                String fileName = propertiesFile.getName();
+                LOG.info("start to copy {}", fileName);
+                doCopyFile(propertiesFile, new File(tmpOutputDir, fileName), "");
             }
         }
     }

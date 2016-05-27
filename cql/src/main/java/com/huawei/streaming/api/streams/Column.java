@@ -37,6 +37,13 @@ public class Column implements Serializable
     private String name;
     
     /**
+     * 原始列名称
+     */
+    @XStreamAsAttribute
+    @XStreamOmitField
+    private String rawname;
+    
+    /**
      * 列别名
      */
     @XStreamAsAttribute
@@ -58,7 +65,18 @@ public class Column implements Serializable
      */
     public Column(String name, Class< ? > type)
     {
+    	this(name,type,name);
+    }
+    
+    /**
+     * <默认构造函数>
+     * @param name 列名称 
+     * @param type 列类型
+     */
+    public Column(String name, Class< ? > type,String rawname)
+    {
         this.name = name;
+        this.rawname = rawname;
         if (type != null)
         {
             this.type = type.getName();
@@ -68,6 +86,11 @@ public class Column implements Serializable
     public String getName()
     {
         return name;
+    }
+    
+    public String getRawName()
+    {
+        return rawname;
     }
     
     public void setName(String name)

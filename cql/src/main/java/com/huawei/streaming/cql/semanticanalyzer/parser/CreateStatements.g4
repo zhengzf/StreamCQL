@@ -107,6 +107,7 @@ primitiveType
 
 colType
     :	primitiveType
+	|	KW_OBJECT
     ;
 
 columnNameType

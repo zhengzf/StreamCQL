@@ -301,13 +301,13 @@ public class PhysicalPlanExecutor implements ExecutorHook
 
             int maxFileSize = config.getIntValue(StreamingConfig.STREAMING_USERFILE_MAXSIZE);
             long length = file.length();
-
+            LOG.info("current file size" + length);
             if(length > (maxFileSize * ONE_MB))
             {
                 ExecutorException exception = new ExecutorException(ErrorCode.SEMANTICANALYZE_USERFILE_OVER_MAXSIZE,
                     String.valueOf(maxFileSize));
                 LOG.error("Submitted jar size than max size.");
-                throw exception;
+//                throw exception;
             }
         }
         catch (IOException e)

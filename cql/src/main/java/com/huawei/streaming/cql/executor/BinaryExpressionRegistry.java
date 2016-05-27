@@ -22,11 +22,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.huawei.streaming.expression.ArithmeticExpression;
-import com.huawei.streaming.expression.ExpressionOperator;
-import com.huawei.streaming.expression.IExpression;
-import com.huawei.streaming.expression.LogicExpression;
-import com.huawei.streaming.expression.RelationExpression;
+import com.huawei.streaming.expression.*;
 
 /**
  * 二元表达式注册
@@ -61,6 +57,8 @@ public class BinaryExpressionRegistry
         //逻辑表达式
         registerExpression("and", ExpressionOperator.LOGICAND, LogicExpression.class);
         registerExpression("or", ExpressionOperator.LOGICOR, LogicExpression.class);
+        registerExpression("in", ExpressionOperator.IN, InListExpression.class);
+        registerExpression("like", ExpressionOperator.LIKE, LikeExpression.class);
     }
     
     /**

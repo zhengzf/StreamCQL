@@ -61,10 +61,7 @@ public class MultiInsertAnalyzeContext extends InsertOnlyAnalyzeContext
     @Override
     public List<Schema> getCreatedSchemas()
     {
-        List<Schema> schemas = Lists.newArrayList();
-        schemas.addAll(selectContext.getCreatedSchemas());
-        schemas.addAll(super.getCreatedSchemas());
-        return schemas;
+        return super.getCreatedSchemas();
     }
     
     /**

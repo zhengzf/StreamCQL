@@ -136,12 +136,13 @@ public class Schema implements Serializable
         {
             String colType = cols.get(j).getType();
             String colName = cols.get(j).getName();
+            String rowName = cols.get(j).getRawName();
             Class< ? > type = getColumnTypeClass(colType);
             if (type == null)
             {
                 return null;
             }
-            s.addCol(new Column(colName, type));
+            s.addCol(new Column(colName, type,rowName));
         }
         return s;
     }

@@ -18,8 +18,10 @@
 
 package com.huawei.streaming.cql.executor.expressioncreater;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import com.huawei.streaming.expression.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +29,6 @@ import com.huawei.streaming.cql.exception.ExecutorException;
 import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.expressiondesc.BinaryExpressionDesc;
 import com.huawei.streaming.cql.semanticanalyzer.analyzecontext.expressiondesc.ExpressionDescribe;
 import com.huawei.streaming.exception.StreamingException;
-import com.huawei.streaming.expression.ArithmeticExpression;
-import com.huawei.streaming.expression.IExpression;
-import com.huawei.streaming.expression.LogicExpression;
-import com.huawei.streaming.expression.RelationExpression;
 
 /**
  * 二元表达式实例判断
@@ -57,6 +55,10 @@ public class BinaryExpressionCreator implements ExpressionCreator
         
         switch (expressionDesc.getBexpression().getType())
         {
+            case LIKE:
+                return createLikeExpression();
+        	case IN:
+        		return createInExpression();
             case ADD:
             case SUBTRACT:
             case MULTIPLY:
@@ -71,6 +73,31 @@ public class BinaryExpressionCreator implements ExpressionCreator
         }
     }
     
+    private IExpression createInExpression()  throws ExecutorException{
+        IExpression leftExpr =
+                ExpressionCreatorFactory.createExpression(expressionDesc.getArgExpressions().get(0), applicationConfig);
+        IExpression rightExpr =
+        		ExpressionCreatorFactory.createExpression(expressionDesc.getArgExpressions().get(1), applicationConfig);
+        
+        return new InListExpression( leftExpr, ((ConstListExpression)rightExpr).getList());
+    }
+
+    private IExpression createLikeExpression()  throws ExecutorException{
+        IExpression leftExpr =
+                ExpressionCreatorFactory.createExpression(expressionDesc.getArgExpressions().get(0), applicationConfig);
+        IExpression rightExpr =
+                ExpressionCreatorFactory.createExpression(expressionDesc.getArgExpressions().get(1), applicationConfig);
+        Object constValue = null;
+        if(rightExpr instanceof  ConstExpression){
+            ConstExpression constExp = (ConstExpression)rightExpr;
+            constValue =  constExp.getConstValue();
+        }else{
+            LOG.error("错误的like语法的右操作数只能是常量");
+            System.exit(-1);
+        }
+        return new LikeExpression( leftExpr, constValue.toString());
+    }
+
     /**
      * 创建数学表达式
      * 比如a+b之类

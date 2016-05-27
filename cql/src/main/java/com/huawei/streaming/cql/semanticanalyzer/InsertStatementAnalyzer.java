@@ -33,7 +33,7 @@ import com.huawei.streaming.cql.semanticanalyzer.parser.context.ParseContext;
 public class InsertStatementAnalyzer extends BaseAnalyzer
 {
     
-    private InsertAnalyzeContext context = null;
+     private InsertAnalyzeContext context = null;
     
     private InsertStatementContext insertContext;
     

@@ -61,9 +61,7 @@ public class SelectWithOutFromAnalyzeContext extends AnalyzeContext
     @Override
     public List<Schema> getCreatedSchemas()
     {
-        List<Schema> schemas = Lists.newArrayList();
-        schemas.addAll(selectClauseContext.getCreatedSchemas());
-        return schemas;
+        return Lists.newArrayList();
     }
     
     /**

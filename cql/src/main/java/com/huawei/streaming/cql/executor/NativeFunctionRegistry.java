@@ -24,6 +24,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ctrip.streaming.udfs.CurrentDate;
+import com.ctrip.streaming.udfs.IndexOf;
+import com.ctrip.streaming.udfs.JsonObj;
+import com.ctrip.streaming.udfs.PatternStr;
 import com.huawei.streaming.cql.exception.SemanticAnalyzerException;
 import com.huawei.streaming.exception.ErrorCode;
 import com.huawei.streaming.process.agg.aggregator.avg.AggregateAvg;
@@ -111,6 +115,10 @@ public class NativeFunctionRegistry
         registerNativeUDF(StringConcat.class);
         registerNativeUDF(StringToUpper.class);
         registerNativeUDF(StringToLower.class);
+        registerNativeUDF(PatternStr.class);
+        registerNativeUDF(JsonObj.class);
+        registerNativeUDF(CurrentDate.class);
+        registerNativeUDF(IndexOf.class);
         
         /*
          * 数学函数
@@ -128,6 +136,7 @@ public class NativeFunctionRegistry
         registerNativeUDF(Minute.class);
         registerNativeUDF(Second.class);
         registerNativeUDF(WeekOfYear.class);
+        
 
         registerNativeUDAF("avg", AggregateAvg.class, AggregateAvgFilter.class);
         registerNativeUDAF("count", AggregateCount.class, AggregateCountFilter.class);

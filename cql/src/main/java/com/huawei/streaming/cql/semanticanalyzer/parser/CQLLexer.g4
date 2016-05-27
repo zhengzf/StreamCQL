@@ -22,10 +22,6 @@
 
 lexer grammar CQLLexer;
 
-@lexer::header {
-package com.huawei.streaming.cql.semanticanalyzer.parser;
-}
-
    
 //key words
 KW_CREATE						:	'CREATE';
@@ -154,6 +150,7 @@ KW_TIMESTAMP					:	'TIMESTAMP';
 KW_DATE							:	'DATE';
 KW_TIME							:	'TIME';
 KW_DECIMAL						:	'DECIMAL';
+KW_OBJECT						:	'OBJECT';
 
 
 // generated as a part of Number rule

@@ -37,7 +37,9 @@ public class ColumnNameTypeContext extends ParseContext
 {
     private String columnName;
     
-    private StreamingDataType columnType;
+    private String columnRawName;
+    
+	private StreamingDataType columnType;
     
     /**
      * {@inheritDoc}
@@ -57,6 +59,15 @@ public class ColumnNameTypeContext extends ParseContext
     {
         this.columnName = columnName;
     }
+    
+    public String getColumnRawName() {
+		return columnRawName;
+	}
+
+	public void setColumnRawName(String columnRawName) {
+		this.columnRawName = columnRawName;
+	}
+
     
     public StreamingDataType getColumnType()
     {
